@@ -1,0 +1,31 @@
+@startuml
+title Modelo Entidad-Relación - [Nombre del Sistema]
+
+' --- Entidades ---
+entity Entidad1 {
+  * id_entidad1 : integer <<PK>>
+  --
+  atributo1 : varchar
+  atributo2 : varchar
+}
+
+entity Entidad2 {
+  * id_entidad2 : integer <<PK>>
+  --
+  atributo1 : varchar
+  id_entidad1 : integer <<FK>>
+}
+
+entity Entidad3 {
+  * id_entidad3 : integer <<PK>>
+  --
+  atributo1 : varchar
+  id_entidad1 : integer <<FK>>
+}
+
+' --- Relaciones ---
+' Sintaxis: EntidadA [cardinalidad] -- [cardinalidad] EntidadB : "etiqueta"
+Entidad1 ||--o{ Entidad2 : "relación"
+Entidad1 ||--o{ Entidad3 : "relación"
+
+@enduml

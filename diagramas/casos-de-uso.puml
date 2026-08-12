@@ -1,0 +1,26 @@
+@startuml
+title Diagrama de Casos de Uso - [Nombre del Sistema]
+
+left to right direction
+
+' --- Actores ---
+actor "[Actor principal]" as A1
+actor "[Actor secundario]" as A2
+
+' --- Sistema ---
+rectangle "[Nombre del Sistema]" {
+  usecase "[Caso de uso 1]" as UC1
+  usecase "[Caso de uso 2]" as UC2
+  usecase "[Caso de uso 3]" as UC3
+}
+
+' --- Relaciones actor-caso de uso ---
+A1 --> UC1
+A1 --> UC2
+A2 --> UC3
+
+' --- Relaciones entre casos de uso ---
+' UC2 .> UC1 : <<include>>
+' UC3 .> UC1 : <<extend>>
+
+@enduml
