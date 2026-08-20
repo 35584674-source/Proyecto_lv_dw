@@ -2,7 +2,7 @@
 
 | Nombre | Apellido | DNI |
 |--------|----------|-----|
-| Jonatan | Casales | |
-| Luciano | Claros | |
-| Julieta | Juncos | |
+| Jonatan | Casales | 35584674 |
+| Luciano | Claros |39505156|
+| Julieta | Juncos |  |
 | German | Gazzola | |
