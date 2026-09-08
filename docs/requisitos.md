@@ -1,70 +1,28 @@
-# Requisitos del sistema
+# Requisitos del Sistema
 
-## Descripción del sistema
+## Requisitos Funcionales (RF)
 
-El sistema tiene como objetivo mejorar la gestión y el control de la facturación, las cuentas corrientes de los clientes y la planificación de las rutas de entrega para la sucursal Rosario de La Virginia.
+| ID | Descripción |
+|----|-------------|
+| RF01 | El sistema debe permitir el login de vendedores mediante usuario y contraseña. |
+| RF02 | El sistema debe permitir consultar facturas asociadas al vendedor. |
+| RF03 | El sistema debe permitir consultar comodatos (préstamo de máquinas de café) asociados a un cliente. |
+| RF04 | El sistema debe permitir generar un remito digital al momento de la entrega. |
+| RF05 | El sistema debe permitir al cliente firmar la entrega mediante un código de seguridad de 4 dígitos. |
+| RF06 | El sistema debe enviar los documentos (factura, remito) al cliente por email. |
+| RF07 | El sistema debe permitir consultar el estado de cuenta corriente del cliente. |
+| RF08 | El sistema debe permitir dar de alta nuevos clientes mediante un formulario. |
+| RF09 | El sistema debe validar los datos cargados en el alta de cliente antes de confirmarla. |
+| RF10 | El sistema debe permitir editar la información de perfil del vendedor. |
+| RF11 | El sistema debe integrarse con SAP para sincronizar facturas, comodatos y cuenta corriente. |
+| RF12 | El sistema debe integrarse con Cygnus para notificar movimientos de stock. |
 
-Actualmente, parte de la gestión se realiza mediante documentación en papel, lo que genera demoras y dificultades para registrar y controlar los pagos realizados por los clientes. El sistema permitirá digitalizar estos procesos y facilitar el acceso a la información.
+## Requisitos No Funcionales (RNF)
 
-El sistema contará con acceso mediante usuario y contraseña y se integrará con sistemas externos de La Virginia, como SAP y Cygnus, para consultar y sincronizar información relacionada con facturación y stock.
-
-## Requisitos funcionales
-
-### Módulo 1 — Control de facturación
-
-| ID | Requisito |
-|----|-----------|
-| RF-01 | El sistema deberá permitir el inicio de sesión mediante usuario y contraseña. |
-| RF-02 | El sistema deberá permitir registrar nuevos clientes. |
-| RF-03 | El sistema deberá permitir consultar facturas digitales. |
-| RF-04 | El sistema deberá generar códigos de validación para confirmar entregas. |
-| RF-07 | El sistema deberá integrarse con SAP para sincronizar la información de facturación. |
-
-### Módulo 2 — Cuenta Corriente
-
-| ID | Requisito |
-|----|-----------|
-| RF-05 | El sistema deberá permitir consultar las cuentas corrientes de los clientes. |
-| RF-06 | El sistema deberá registrar los pagos realizados por los clientes. |
-| RF-09 | El sistema deberá registrar el historial de operaciones realizadas por los usuarios. |
-| RF-10 | El sistema deberá permitir la recuperación de contraseña. |
-
-### Módulo 3 — Planificación de rutas
-
-| ID | Requisito |
-|----|-----------|
-| RF-08 | El sistema deberá permitir visualizar las rutas de reparto asignadas. |
-
-## Requisitos no funcionales
-
-### Rendimiento y disponibilidad
-
-| ID | Requisito |
-|----|-----------|
-| RNF-01 | El sistema deberá estar disponible las 24 horas. |
-| RNF-03 | El sistema deberá responder en menos de 5 segundos ante consultas normales. |
-| RNF-04 | El sistema deberá contar con copias de seguridad automáticas. |
-| RNF-05 | El sistema deberá funcionar correctamente en tablets y dispositivos móviles. |
-
-### Seguridad y usabilidad
-
-| ID | Requisito |
-|----|-----------|
-| RNF-02 | La información deberá transmitirse mediante conexiones seguras HTTPS. |
-| RNF-06 | El acceso al sistema deberá gestionarse mediante roles y permisos. |
-| RNF-07 | El sistema deberá garantizar la integridad y confidencialidad de la información. |
-| RNF-08 | La interfaz deberá ser intuitiva y fácil de utilizar. |
-
-### Integridad y trazabilidad
-
-| ID | Requisito |
-|----|-----------|
-| RNF-09 | El sistema deberá garantizar la integridad de las operaciones realizadas sobre las cuentas corrientes y los pagos registrados. |
-| RNF-10 | El sistema deberá mantener un registro de auditoría de las operaciones realizadas por los usuarios, indicando usuario, fecha, hora y operación efectuada. |
-
-### Integración y sincronización
-
-| ID | Requisito |
-|----|-----------|
-| RNF-11 | El sistema deberá garantizar la sincronización de la información con los sistemas externos SAP y Cygnus. |
-| RNF-12 | El sistema deberá informar y registrar los errores producidos durante la sincronización con los sistemas externos. |
+| ID | Descripción |
+|----|-------------|
+| RNF01 | El sistema debe responder las consultas en menos de 3 segundos. |
+| RNF02 | El sistema debe ser accesible desde dispositivos móviles (celular/tablet). |
+| RNF03 | El sistema debe garantizar la integridad de los documentos digitales generados. |
+| RNF04 | El sistema debe mantener un registro (log) de las operaciones críticas (login, generación de remito, firma). |
+| RNF05 | El sistema debe cumplir con la integración fiscal vigente (ARCA) a través de SAP. |

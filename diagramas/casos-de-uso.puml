@@ -1,26 +1,38 @@
 @startuml
-title Diagrama de Casos de Uso - [Nombre del Sistema]
+title Diagrama de Casos de Uso - Sistema de Facturación Digital La Virginia
 
 left to right direction
 
 ' --- Actores ---
-actor "[Actor principal]" as A1
-actor "[Actor secundario]" as A2
+actor "Vendedor" as A1
+actor "Cliente" as A2
 
 ' --- Sistema ---
-rectangle "[Nombre del Sistema]" {
-  usecase "[Caso de uso 1]" as UC1
-  usecase "[Caso de uso 2]" as UC2
-  usecase "[Caso de uso 3]" as UC3
+rectangle "Sistema de Facturación" {
+  usecase "Login" as UC1
+  usecase "Consultar Facturas" as UC2
+  usecase "Consultar Comodatos" as UC3
+  usecase "Generar Remito" as UC4
+  usecase "Firmar Confirmación de Entrega" as UC5
+  usecase "Consultar Cuenta Corriente" as UC6
+  usecase "Dar de Alta Cliente" as UC7
+  usecase "Editar Perfil" as UC8
+  usecase "Enviar Documentos por Email" as UC9
 }
 
 ' --- Relaciones actor-caso de uso ---
 A1 --> UC1
 A1 --> UC2
-A2 --> UC3
+A1 --> UC3
+A1 --> UC4
+A1 --> UC6
+A1 --> UC7
+A1 --> UC8
+A2 --> UC5
+A2 --> UC9
 
 ' --- Relaciones entre casos de uso ---
-' UC2 .> UC1 : <<include>>
-' UC3 .> UC1 : <<extend>>
+UC4 .> UC5 : <<include>>
+UC5 .> UC9 : <<include>>
 
 @enduml

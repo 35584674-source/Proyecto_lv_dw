@@ -1,74 +1,17 @@
-# Casos de uso
+# Casos de Uso
 
-## Diagrama general
+## Actores
+- **Vendedor**: usuario principal del sistema, gestiona pedidos, facturas y clientes.
+- **Cliente**: recibe documentación y confirma entregas.
+- **Sistema**: ejecuta procesos automáticos de sincronización (SAP, Cygnus, Email).
 
-_Incluir el código PlantUML en `diagramas/casos-de-uso.puml`._
-_Visualizar en [plantuml.com](https://www.plantuml.com/plantuml/uml/)._
-
-_Describir brevemente los actores identificados y las relaciones principales (include, extend)._
-
----
-
-## CU-01 — [Nombre]
-
-| Campo | Detalle |
-|-------|---------|
-| Identificador | CU-01 |
-| Nombre | |
-| Descripción | |
-| Actores | Principal: / Secundario: |
-| Precondiciones | |
-| Postcondiciones | Éxito: / Fallo: |
-
-### Secuencia normal
-
-| # | Acción (actor) | Reacción (sistema) |
-|---|----------------|--------------------|
-| 1 | | |
-| 2 | | |
-
-### Excepciones
-
-| # | Situación | Respuesta del sistema |
-|---|-----------|-----------------------|
-| E1 | | |
-
-| Campo | Detalle |
-|-------|---------|
-| Rendimiento | |
-| Frecuencia | |
-| Importancia | |
-| Urgencia | |
-
----
-
-## CU-02 — [Nombre]
-
-| Campo | Detalle |
-|-------|---------|
-| Identificador | CU-02 |
-| Nombre | |
-| Descripción | |
-| Actores | Principal: / Secundario: |
-| Precondiciones | |
-| Postcondiciones | Éxito: / Fallo: |
-
-### Secuencia normal
-
-| # | Acción (actor) | Reacción (sistema) |
-|---|----------------|--------------------|
-| 1 | | |
-| 2 | | |
-
-### Excepciones
-
-| # | Situación | Respuesta del sistema |
-|---|-----------|-----------------------|
-| E1 | | |
-
-| Campo | Detalle |
-|-------|---------|
-| Rendimiento | |
-| Frecuencia | |
-| Importancia | |
-| Urgencia | |
+## Listado de Casos de Uso (a desarrollar en detalle la próxima clase)
+- CU01: Login
+- CU02: Consultar Facturas
+- CU03: Consultar Comodatos
+- CU04: Generar Remito
+- CU05: Firmar Confirmación de Entrega
+- CU06: Consultar Cuenta Corriente
+- CU07: Dar de Alta Cliente
+- CU08: Editar Información de Perfil
+- CU09: Consultar Documentos por Email
