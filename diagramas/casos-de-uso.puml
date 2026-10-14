@@ -6,6 +6,7 @@ left to right direction
 ' --- Actores ---
 actor "Vendedor" as A1
 actor "Cliente" as A2
+actor "Sistema\n(SAP, Cygnus, Email)" as A3
 
 ' --- Sistema ---
 rectangle "Sistema de Facturación" {
@@ -30,8 +31,12 @@ A1 --> UC7
 A1 --> UC8
 A2 --> UC5
 A2 --> UC9
-
-' --- Relaciones entre casos de uso ---
-
+A3 --> UC1
+A3 --> UC2
+A3 --> UC3
+A3 --> UC4
+A3 --> UC6
+A3 --> UC7
+A3 --> UC9
 
 @enduml
