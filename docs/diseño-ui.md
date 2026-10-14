@@ -152,7 +152,19 @@ Wireframes de alta fidelidad del sistema de facturación digital de La Virginia,
 
 ---
 
-## Consideraciones de accesibilidad
+## Pantalla 10 — Ruta de entrega
+
+**Wireframe:** `diagramas/wireframes/10-ruta-entrega.png`
+
+![Ruta de entrega](../diagramas/wireframes/10-ruta-entrega.png)
+
+**Patrones de diseño utilizados:** lista numerada de paradas (cards), barra de progreso, estados con color, parada actual destacada, botón de acción contextual.
+
+**Justificación:** el relevamiento mostró que la hoja de ruta actual es compleja para los repartidores y que en la práctica casi no se usa: salen a la calle confiando en el control interno previo. Esta pantalla la reemplaza con algo más simple: muestra el orden de las paradas, cuántas lleva entregadas y destaca solo la siguiente. El botón inferior inicia la entrega de esa parada y conecta con la generación del remito (CU04) y la confirmación con código (CU05). El orden de las paradas sale de la ruta asignada (`ruta_entrega_documento`).
+
+**Formulario:** no aplica.
+
+---## Consideraciones de accesibilidad
 
 - **Contraste alto para uso en la calle:** el vendedor usa el sistema al aire libre, con sol directo sobre la pantalla. Por eso el texto principal es azul oscuro `#0C447C` sobre fondo blanco, y el texto de los botones es blanco sobre ese mismo azul, combinaciones de contraste muy alto que se leen aun con reflejos.
 - **El color nunca es la única señal:** los estados llevan texto (Pendiente, Pagada, Activo, Por devolver) y los montos de la cuenta corriente llevan signo (+ o -) además del color rojo o verde. Así se entienden también con
