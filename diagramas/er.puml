@@ -1,31 +1,130 @@
+
 @startuml
-title Modelo Entidad-Relación - [Nombre del Sistema]
+title La Virginia - Modelo Entidad-Relacion
 
-' --- Entidades ---
-entity Entidad1 {
-  * id_entidad1 : integer <<PK>>
+hide circle
+skinparam linetype ortho
+
+entity "zona_entrega" as zona {
+  * id_zona : SERIAL <<PK>>
   --
-  atributo1 : varchar
-  atributo2 : varchar
+  codigo_zona : VARCHAR(50) <<UNIQUE>>
+  descripcion : VARCHAR(255)
 }
 
-entity Entidad2 {
-  * id_entidad2 : integer <<PK>>
+entity "vendedor" as vendedor {
+  * id_vendedor : SERIAL <<PK>>
   --
-  atributo1 : varchar
-  id_entidad1 : integer <<FK>>
+  nombre : VARCHAR(150)
+  usuario : VARCHAR(100) <<UNIQUE>>
+  password_hash : VARCHAR(255)
+  dispositivo : VARCHAR(150)
+  id_zona : INTEGER <<FK>>
 }
 
-entity Entidad3 {
-  * id_entidad3 : integer <<PK>>
+entity "cliente" as cliente {
+  * id_cliente : SERIAL <<PK>>
   --
-  atributo1 : varchar
-  id_entidad1 : integer <<FK>>
+  nombre : VARCHAR(150)
+  denominacion : VARCHAR(150)
+  cuit : VARCHAR(20) <<UNIQUE>>
+  estado : VARCHAR(30)
+  id_zona : INTEGER <<FK>>
 }
 
-' --- Relaciones ---
-' Sintaxis: EntidadA [cardinalidad] -- [cardinalidad] EntidadB : "etiqueta"
-Entidad1 ||--o{ Entidad2 : "relación"
-Entidad1 ||--o{ Entidad3 : "relación"
+entity "cuenta_corriente" as cuenta {
+  * id_cuenta : SERIAL <<PK>>
+  --
+  numero_cuenta : VARCHAR(50) <<UNIQUE>>
+  estado : VARCHAR(30)
+  id_cliente : INTEGER <<FK, UNIQUE>>
+}
+
+entity "ruta_entrega" as ruta {
+  * id_ruta : SERIAL <<PK>>
+  --
+  fecha : DATE
+  estado : VARCHAR(30)
+  id_vendedor : INTEGER <<FK>>
+}
+
+entity "codigo_seguridad" as codigo {
+  * id_codigo : SERIAL <<PK>>
+  --
+  codigo : VARCHAR(20)
+  estado : VARCHAR(30)
+  id_ruta : INTEGER <<FK>>
+}
+
+entity "documento" as documento {
+  * id_documento : SERIAL <<PK>>
+  --
+  numero : VARCHAR(50)
+  referencia : VARCHAR(100)
+  fecha_emision : DATE
+  fecha_vencimiento : DATE
+  clase_doc : INTEGER
+  importe : DECIMAL(15,2)
+  explicacion : TEXT
+  texto_ref : TEXT
+  clave_referencia : VARCHAR(100)
+  estado : VARCHAR(30)
+  id_cliente : INTEGER <<FK>>
+  id_vendedor : INTEGER <<FK>>
+}
+
+entity "comodato" as comodato {
+  * id_documento : INTEGER <<PK, FK>>
+  --
+  descripcion_objeto : VARCHAR(255)
+  fecha_entrega_programada : DATE
+  condicion_prestamo : VARCHAR(255)
+}
+
+entity "factura" as factura {
+  * id_documento : INTEGER <<PK, FK>>
+  --
+  tipo_factura : VARCHAR(10)
+}
+
+entity "remito" as remito {
+  * id_documento : INTEGER <<PK, FK>>
+}
+
+entity "ruta_entrega_documento" as ruta_doc {
+  * id_ruta : INTEGER <<PK, FK>>
+  * id_documento : INTEGER <<PK, FK>>
+  --
+  orden : INTEGER
+}
+
+entity "movimiento_cuenta" as movimiento {
+  * id_movimiento : SERIAL <<PK>>
+  --
+  id_cuenta : INTEGER <<FK>>
+  id_documento : INTEGER <<FK>>
+  importe : DECIMAL(15,2)
+}
+
+zona |o--o{ vendedor : asigna
+zona |o--o{ cliente : agrupa
+
+vendedor |o--o{ ruta : realiza
+vendedor |o--o{ documento : gestiona
+
+cliente ||--o| cuenta : posee
+cliente |o--o{ documento : recibe
+
+ruta |o--o{ codigo : contiene
+
+documento ||--o| comodato : subtipo
+documento ||--o| factura : subtipo
+documento ||--o| remito : subtipo
+
+ruta ||--o{ ruta_doc : incluye
+documento ||--o{ ruta_doc : pertenece
+
+cuenta ||--o{ movimiento : registra
+documento |o--o{ movimiento : origina
 
 @enduml
