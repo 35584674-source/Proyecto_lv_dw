@@ -228,6 +228,51 @@ Y el remito permanece en estado "generado"
 ---
 | HU06 | Como cliente, quiero recibir mis facturas y remitos por email, para tener un respaldo digital de mis compras. |
 ---
+  **Actor principal:** Vendedor (solicita el envío) / Cliente (lo recibe)
+ 
+### Precondiciones
+- Sesión iniciada.
+- Existen uno o más documentos (`factura`, `comodato` o `remito`) asociados al cliente.
+- El cliente tiene una dirección de email válida registrada.
+### Postcondiciones
+- Se envía al cliente, por email, el o los documentos seleccionados (`EmailService.enviarDocumento()`).
+- Queda un registro de que el envío fue solicitado (y, opcionalmente, de si fue exitoso).
+### Secuencia principal
+1. El vendedor selecciona el cliente y el o los documentos a enviar.
+2. El sistema arma el contenido a enviar según el tipo de documento (factura, comodato o remito).
+3. El sistema llama a `EmailService.enviarDocumento()` con el email del cliente.
+4. El sistema confirma al vendedor que el envío fue realizado.
+### Excepciones
+- **E1 — Cliente sin email registrado:** se bloquea el envío y se solicita completar el dato antes de continuar.
+- **E2 — Falla el envío de email** (servicio caído, dirección inválida): se informa el error y se permite reintentar.
+- **E3 — Documento inexistente o inaccesible para ese cliente:** se rechaza la selección con un mensaje claro.
+### Criterios de aceptación
+```gherkin
+Dado que un cliente tiene email registrado y una factura disponible
+Cuando el vendedor solicita enviarla por email
+Entonces el sistema envía el documento
+Y confirma el envío exitoso al vendedor
+ 
+Dado que un cliente no tiene email registrado
+Cuando el vendedor intenta enviar un documento
+Entonces el sistema bloquea la acción
+Y solicita completar el email del cliente primero
+```
+ 
+### Verificación INVEST
+| Criterio | Cumple | Justificación |
+|---|---|---|
+| Independent | Parcial | Depende de que el cliente tenga email, pero la lógica de envío en sí es independiente. |
+| Negotiable | Sí | El formato del email (adjunto PDF vs. link) es un detalle a definir con el equipo. |
+| Valuable | Sí | Le da autonomía al vendedor para reenviar documentación sin depender de otro canal. |
+| Estimable | Sí | Acotado a: validar email + armar contenido + invocar servicio de envío. |
+| Small | Sí | Cabe en una sola historia, incluso separando por tipo de documento si creciera. |
+| Testable | Sí | Se prueba con clientes con y sin email, y con fallas simuladas del servicio de envío. |
+ 
+---
+
+| HU07 | Como vendedor, quiero consultar la cuenta corriente de un cliente, para saber si tiene pagos pendientes. |
+---
   **Actor principal:** Vendedor
  
 ### Precondiciones
@@ -266,7 +311,8 @@ Entonces se muestra un mensaje indicando que no tiene cuenta habilitada
 | Testable | Sí | Verificable con los movimientos de `seed.sql`. |
  
 ---
-| HU07 | Como vendedor, quiero consultar la cuenta corriente de un cliente, para saber si tiene pagos pendientes. |
+
+| HU08 | Como vendedor, quiero dar de alta un nuevo cliente desde el sistema, para agilizar la incorporación sin papeles. |
 ---
   **Actor principal:** Vendedor
  
@@ -313,7 +359,8 @@ Y muestra que el cliente ya está registrado
 | Testable | Sí | Se prueba con CUITs válidos, duplicados e inválidos. |
  
 ---
-| HU08 | Como vendedor, quiero dar de alta un nuevo cliente desde el sistema, para agilizar la incorporación sin papeles. |
+
+| HU09 | Como vendedor, quiero editar mi información de perfil, para mantener mis datos actualizados. |
 ---
   **Actor principal:** Vendedor
  
@@ -352,49 +399,5 @@ Y muestra que el usuario ya está en uso
 | Estimable | Sí | Update simple sobre una sola tabla. |
 | Small | Sí | Acotado a un formulario de edición. |
 | Testable | Sí | Se valida con casos de usuario único, duplicado y contraseña inválida. |
- 
----
-| HU09 | Como vendedor, quiero editar mi información de perfil, para mantener mis datos actualizados. |
----
-  **Actor principal:** Vendedor (solicita el envío) / Cliente (lo recibe)
- 
-### Precondiciones
-- Sesión iniciada.
-- Existen uno o más documentos (`factura`, `comodato` o `remito`) asociados al cliente.
-- El cliente tiene una dirección de email válida registrada.
-### Postcondiciones
-- Se envía al cliente, por email, el o los documentos seleccionados (`EmailService.enviarDocumento()`).
-- Queda un registro de que el envío fue solicitado (y, opcionalmente, de si fue exitoso).
-### Secuencia principal
-1. El vendedor selecciona el cliente y el o los documentos a enviar.
-2. El sistema arma el contenido a enviar según el tipo de documento (factura, comodato o remito).
-3. El sistema llama a `EmailService.enviarDocumento()` con el email del cliente.
-4. El sistema confirma al vendedor que el envío fue realizado.
-### Excepciones
-- **E1 — Cliente sin email registrado:** se bloquea el envío y se solicita completar el dato antes de continuar.
-- **E2 — Falla el envío de email** (servicio caído, dirección inválida): se informa el error y se permite reintentar.
-- **E3 — Documento inexistente o inaccesible para ese cliente:** se rechaza la selección con un mensaje claro.
-### Criterios de aceptación
-```gherkin
-Dado que un cliente tiene email registrado y una factura disponible
-Cuando el vendedor solicita enviarla por email
-Entonces el sistema envía el documento
-Y confirma el envío exitoso al vendedor
- 
-Dado que un cliente no tiene email registrado
-Cuando el vendedor intenta enviar un documento
-Entonces el sistema bloquea la acción
-Y solicita completar el email del cliente primero
-```
- 
-### Verificación INVEST
-| Criterio | Cumple | Justificación |
-|---|---|---|
-| Independent | Parcial | Depende de que el cliente tenga email, pero la lógica de envío en sí es independiente. |
-| Negotiable | Sí | El formato del email (adjunto PDF vs. link) es un detalle a definir con el equipo. |
-| Valuable | Sí | Le da autonomía al vendedor para reenviar documentación sin depender de otro canal. |
-| Estimable | Sí | Acotado a: validar email + armar contenido + invocar servicio de envío. |
-| Small | Sí | Cabe en una sola historia, incluso separando por tipo de documento si creciera. |
-| Testable | Sí | Se prueba con clientes con y sin email, y con fallas simuladas del servicio de envío. |
  
 ---
