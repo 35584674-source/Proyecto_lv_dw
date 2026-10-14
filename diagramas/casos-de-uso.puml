@@ -32,7 +32,6 @@ A2 --> UC5
 A2 --> UC9
 
 ' --- Relaciones entre casos de uso ---
-UC4 .> UC5 : <<include>>
-UC5 .> UC9 : <<include>>
+
 
 @enduml
